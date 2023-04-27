@@ -1,0 +1,28 @@
+version: 1
+disable_existing_loggers: True
+
+formatters:
+  tostrout:
+    format: "%(asctime)s - %(name)s - %(levelname)-9s - %(filename)-8s : %(lineno)s line - %(message)s"
+    datefmt: "%Y/%m/%d %H:%M:%S"
+  tofile:
+    format: "%(asctime)s - %(name)s - %(levelname)-9s - %(filename)-8s : %(lineno)s line - %(message)s"
+
+handlers:
+  sh:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: tostrout
+    stream: ext://sys.stdout
+  fh:
+    class: logging.FileHandler
+    filename: logging.log
+    mode: w
+    level: DEBUG
+    formatter: tofile
+
+loggers:
+  logger:
+    level: DEBUG
+    handlers: [sh, fh]
+    propagate: no
